@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+<style>
+*{box-sizing:border-box;font-family:Arial}
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:url("logo.jpeg") center/cover no-repeat;
+    overflow: hidden; /* Prevents scrollbar jumping */
+}
+
+.card{
+    width:420px;
+    background:#fff;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.3);
+    position:relative;
+}
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  cursor:pointer;
+  background:#999;   /* light black */
+  color:white;
+  padding:5px 10px;
+  border-radius:5px;
+}
+
+h2{margin-bottom:5px}
+.subtitle{color:#666;margin-bottom:20px}
+
+/* Exclude checkbox from taking 100% width */
+input:not([type="checkbox"]), select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    justify-content: flex-start;
+    gap:10px;
+    margin:10px 0 20px 0;
+    font-size:14px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#27ae60;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:disabled{background:#999}
+
+.login-link{text-align:center;margin-top:15px}
+
+/* notification */
+#notification{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:9999;
+}
+
+.note{
+    padding:12px 20px;
+    border-radius:6px;
+    color:white;
+    margin-bottom:10px;
+    font-weight:bold;
+    animation:slide .3s ease;
+}
+
+.success{background:#27ae60}
+.error{background:#e74c3c}
+
+@keyframes slide{
+    from{opacity:0;transform:translateX(80px)}
+    to{opacity:1;transform:translateX(0)}
+}
+</style>
+</head>
+<body>
+
+<div id="notification"></div>
+
+<div class="card">
+    <div class="close-btn" onclick="goHome()">X</div>
+    <h2>Join us</h2>
+    <p class="subtitle">Create a product analytics account</p>
+
+    <form id="registerForm">
+        <input id="username" placeholder="Username" required>
+        <input id="email" type="email" placeholder="Email" required>
+
+        <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <div class="checkbox">
+            <input type="checkbox" required>
+            <label>I agree to be a part of the team</label>
+        </div>
+
+        <button id="btn">Sign up</button>
+    </form>
+
+    <div class="login-link">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+function showNotification(msg,type){
+    const box=document.createElement("div");
+    box.className="note "+type;
+    box.innerText=msg;
+    document.getElementById("notification").appendChild(box);
+    setTimeout(()=>box.remove(),3000);
+}
+
+document.getElementById("registerForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+
+    const btn=document.getElementById("btn");
+    btn.disabled=true;
+    btn.innerText="Creating...";
+
+    const data={
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value
+    };
+
+    try{
+        const res=await fetch("http://127.0.0.1:8000/auth/register",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(data)
+        });
+
+        const result=await res.json();
+
+        if(res.ok){
+            showNotification(result.message,"success");
+            setTimeout(()=>location.href="login.html",1500);
+        }else{
+            showNotification(result.message,"error");
+        }
+
+    }catch{
+        showNotification("Server error","error");
+    }
+
+    btn.disabled=false;
+    btn.innerText="Sign up";
+});
+function goHome(){
+    window.location.href="landing.html";
+}
+</script>
+
+</body>
+</html>

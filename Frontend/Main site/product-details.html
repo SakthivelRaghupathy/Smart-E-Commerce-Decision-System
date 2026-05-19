@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Page</title>
+
+<style>
+:root {
+    --primary: #2563eb;
+    --secondary: #1e293b;
+    --accent: #f59e0b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --bg: #f1f5f9;
+    --white: #ffffff;
+    --text: #334155;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #1c75be57;
+    color: rgb(25, 203, 235);
+    padding: 20px 60px;   
+    width: 100%;          
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+    margin-right: 30px;
+}
+
+.nav-links a {
+    color: rgb(26, 107, 230);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+.nav-links a.active {
+    text-decoration: underline;
+    color: #000;
+}
+
+/* ===== LAYOUT ===== */
+.content-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 2px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.section-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.titles-area {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(187, 13, 187, 0.753);
+    margin: 0;
+}
+
+.sub-title {
+    font-size: 1.2rem;
+    color: black;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-left: 490px;
+}
+
+select, input {
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 400px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 522px;
+}
+
+.btn-search {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-analyze {
+    background: var(--secondary);
+    color: white;
+    margin-top: 20px;
+}
+
+/* ===== PRODUCTS ===== */
+.results-area {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 10px;
+    margin-left: 180px;
+}
+
+.product-item {
+    background: #e3e6e9;
+    border: 2px solid #090909;
+    box-shadow: 0 0 10px rgba(37,99,235,0.4);
+    border-radius: 12px;
+    padding: 25px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between; /* Ensures buttons push to the bottom */
+}
+
+.product-item.selected {
+    border: 3px solid #2563eb;
+}
+
+/* New CSS container for the side-by-side buttons */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    width: 100%;
+    margin-top: 20px;
+    align-items: center;
+}
+
+/* New CSS for the Image Button */
+.img-btn {
+    padding: 8px 15px;
+    margin-left:45px;
+    background:transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.img-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ===== MY CHOICES ===== */
+.choice-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #2563eb;
+}
+
+.remove-btn {
+    background: #101111;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+     <img src="websitelogo.jpg.png" alt="Logo">
+    <img src="preview.jpg.png" alt="website name">
+</div>
+
+<div class="nav-links">
+    <a href="home.html">🏠 Home</a>
+    <a href="product-details.html">📄 Product</a>
+    <a href="analyse.html">📊 Analyze</a>
+    <a href="suggestion4.html">💡 Suggestion</a>
+    <a href="profile.html">👤 Profile</a>
+</div>
+</header>
+
+<div class="content-container">
+
+<div class="section-card">
+<div class="titles-area">
+    <h1 class="main-title">Search a Desired Product</h1>
+    <div class="sub-title">As you wish!</div>
+</div>
+
+<div class="filter-grid">
+    <input type="text" id="category" placeholder="Enter Category (e.g., Electronics)">
+    <br>
+    <input type="text" id="productName" placeholder="Enter Product Type (e.g., Mobile Phones)"><br>
+    <input type="text" id="brandName" placeholder="Enter Brand Name(e.g.,samsung)"><br>
+    <input type="number" id="minBudget" placeholder="Min Price (₹)"><br>
+    <input type="number" id="maxBudget" placeholder="Max Price (₹)">
+</div>
+
+<button class="btn btn-search" onclick="getProducts()">GET PRODUCTS</button>
+<h2>Product List</h2>
+
+<div class="results-area" id="productArea"></div>
+</div>
+
+<div class="section-card">
+<h3 style="margin:0; border-bottom: 2px solid var(--bg); padding-bottom: 10px;">My choices</h3>
+
+<div id="noSelectionText" style="color:#94a3b8; text-align: center; padding: 20px;">
+    No product chosen for analysis. double click on a product above.
+</div>
+
+<div id="detailInfo" style="display:none;">
+    <div id="selectedList"></div>
+</div>
+
+<button class="btn btn-analyze" onclick="goAnalyze()">ANALYZE NOW</button>
+</div>
+</div>
+
+<script>
+// ================= NAV ACTIVE =================
+const links = document.querySelectorAll(".nav-links a");
+
+let current = window.location.pathname.split("/").pop();
+if(current === "") current = "home.html";
+
+links.forEach(link=>{
+  let linkPage = link.getAttribute("href").replace(/\s/g, "").toLowerCase();
+  let currentPage = current.replace(/\s/g, "").toLowerCase();
+
+  if(linkPage === currentPage){
+    link.classList.add("active");
+  }
+});
+
+// ================= GLOBAL VARIABLES =================
+let selectedProducts = JSON.parse(localStorage.getItem("choices")) || [];
+let savedProductIds = JSON.parse(localStorage.getItem("saved_product_ids")) || []; 
+
+// ================= GET PRODUCTS =================
+async function getProducts() {
+    const area = document.getElementById("productArea");
+    area.innerHTML = "<p style='text-align:center;width:100%'>Loading...</p>";
+
+    const category = document.getElementById("category").value;
+    const product_name = document.getElementById("productName").value;
+    const brand = document.getElementById("brandName").value;
+    const min_budget = parseInt(document.getElementById("minBudget").value) || 0;
+    const max_budget = parseInt(document.getElementById("maxBudget").value) || 999999;
+
+    const searchParams = { category, product_name, brand, min_budget, max_budget };
+    localStorage.setItem("search_params", JSON.stringify(searchParams));
+
+    const user_id = localStorage.getItem("user_id");
+
+    if (!user_id) {
+        alert("User not logged in");
+        return;
+    }
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-user-id": user_id
+            },
+            body: JSON.stringify({ category, product_name, brand, min_budget, max_budget })
+        });
+
+        const data = await res.json();
+        console.log("API RESPONSE:", data);
+        
+        localStorage.setItem("search_results", JSON.stringify(data.products));
+
+        if (!data.products || data.products.length === 0) {
+            area.innerHTML = "<p style='text-align:center;width:100%'>No products found</p>";
+            return;
+        }
+
+        const products = data.products.slice(0, 9);
+        localStorage.setItem("last_products", JSON.stringify(products));
+
+        displayProducts(products);
+
+    } catch (err) {
+        console.error(err);
+        area.innerHTML = "<p style='color:red'>Server error</p>";
+    }
+}
+
+// ================= DISPLAY PRODUCTS =================
+function displayProducts(products){
+    const area = document.getElementById("productArea");
+    area.innerHTML = "";
+    
+    products.forEach(p => {
+        let div = document.createElement("div");
+        div.className = "product-item";
+        div.ondblclick = () => selectForAnalysis(p);
+
+        let isSaved = savedProductIds.includes(p.product_id);
+        let btnText = isSaved ? "SAVED" : "SAVE";
+        let btnColor = isSaved ? "#ef4444" : "#10b981";
+
+        // Image tag removed. Button group added at the bottom.
+        div.innerHTML = `
+            <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%;">
+                <b style="font-size: 16px; margin-bottom: 8px;">${p.model_name}</b>
+                <small style="color: #64748b; margin-bottom: 8px;">${p.brand_name}</small>
+                <small style="color:#2563eb; font-weight:bold; font-size: 15px; margin-bottom: 8px;">₹ ${p.price}</small>
+                <small>⭐ ${p.rating}</small>
+            </div>
+
+            <div class="card-actions">
+                <button class="img-btn" onclick="window.open('${getValidImage(p.product_image)}', '_blank')">View Image</button>
+                <button onclick='toggleSaveProduct(${JSON.stringify(p)}, this)'
+                style="padding:8px 15px;margin-right:45px;background:${btnColor};border:none;border-radius:6px;color:white;cursor:pointer;font-weight:bold;size:35px;">
+                ${btnText}
+                </button>
+            </div>
+        `;
+
+        area.appendChild(div);
+    });
+}
+
+function getValidImage(url){
+    if(!url || url.trim() === "" || url === "undefined"){
+        return "https://via.placeholder.com/600?text=No+Image+Available";
+    }
+    return url;
+}
+
+// ================= SELECT PRODUCT (MY CHOICES) =================
+function selectForAnalysis(product) {
+    if (selectedProducts.length >= 3) {
+        alert("Maximum 3 products only");
+        return;
+    }
+    if (selectedProducts.some(p => p.id === product.product_id)) return;
+
+    selectedProducts.push({
+        id: product.product_id,
+        name: product.model_name,
+        price: product.price,
+        rating: product.rating
+    });
+
+    localStorage.setItem("choices", JSON.stringify(selectedProducts));
+    renderSelectedList();
+}
+
+// ================= RENDER SELECTED =================
+function renderSelectedList(){
+    const list = document.getElementById("selectedList");
+    list.innerHTML = "";
+
+    if(selectedProducts.length > 0) {
+        document.getElementById("noSelectionText").style.display = "none";
+        document.getElementById("detailInfo").style.display = "block";
+    } else {
+        document.getElementById("noSelectionText").style.display = "block";
+        document.getElementById("detailInfo").style.display = "none";
+    }
+
+    selectedProducts.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "choice-item";
+        div.innerHTML = `
+            <div>
+                <b>${p.name}</b><br>
+                <small>₹ ${p.price} | ⭐ ${p.rating}</small>
+            </div>
+            <button class="remove-btn" onclick="removeChoice('${p.id}')">✕</button>
+        `;
+        list.appendChild(div);
+    });
+}
+
+function removeChoice(id){
+    selectedProducts = selectedProducts.filter(p => p.id !== id);
+    localStorage.setItem("choices", JSON.stringify(selectedProducts));
+    renderSelectedList();
+}
+
+// ================= TOGGLE SAVE PRODUCT =================
+async function toggleSaveProduct(p, btnElement){
+    let isSaved = savedProductIds.includes(p.product_id);
+
+    if (!isSaved) {
+        try {
+            await fetch("http://127.0.0.1:8000/save-product", {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "x-user-id": localStorage.getItem("user_id")
+                },
+                body: JSON.stringify({
+                    product_id: p.product_id, brand_name: p.brand_name,
+                    product_name: p.model_name, price: p.price,
+                    rating: p.rating, product_image: p.product_image
+                })
+            });
+
+            btnElement.innerText = "SAVED";
+            btnElement.style.background = "#ef4444"; 
+            
+            savedProductIds.push(p.product_id);
+            localStorage.setItem("saved_product_ids", JSON.stringify(savedProductIds));
+        } catch {
+            console.error("Error saving product");
+        }
+    } else {
+        btnElement.innerText = "SAVE";
+        btnElement.style.background = "#10b981"; 
+
+        savedProductIds = savedProductIds.filter(id => id !== p.product_id);
+        localStorage.setItem("saved_product_ids", JSON.stringify(savedProductIds));
+    }
+}
+
+async function goAnalyze() {
+  if(selectedProducts.length === 0){
+    alert("Select products first");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        product_ids: selectedProducts 
+      })
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    window.location.href = "analyse.html";
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// ================= RESTORE ALL DATA ON LOAD =================
+window.onload = () => {
+    renderSelectedList();
+
+    const savedParams = JSON.parse(localStorage.getItem("search_params"));
+    if (savedParams) {
+        document.getElementById("category").value = savedParams.category || "";
+        document.getElementById("productName").value = savedParams.product_name || "";
+        document.getElementById("brandName").value = savedParams.brand || "";
+        if(savedParams.min_budget) document.getElementById("minBudget").value = savedParams.min_budget;
+        if(savedParams.max_budget && savedParams.max_budget !== 999999) {
+            document.getElementById("maxBudget").value = savedParams.max_budget;
+        }
+    }
+
+    const savedResults = localStorage.getItem("search_results");
+    if(savedResults){
+        displayProducts(JSON.parse(savedResults));
+    }
+};
+</script>
+</body>
+</html>

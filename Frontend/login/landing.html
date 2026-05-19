@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product AnalytriX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background-image:url("landinglogo.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar{
+  display:flex;
+  justify-content:space-between; 
+  align-items:center;
+  padding:15px 40px;
+  background:#2c3e50;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index: 1000;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:40px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap: 30px; /* Controls spacing between links cleanly */
+}
+
+/* Active link-ku matum green line vara */
+.nav-links a.active {
+  border-bottom: 3px solid #00c853; 
+  padding-bottom: 5px; 
+}
+
+/* Mouse mela kondu pona line vara (Hover effect) */
+.nav-links a:hover {
+  border-bottom: 3px solid #00c853;
+  padding-bottom: 5px;
+  transition: 0.3s; 
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.logo{
+  margin-left: 10px;
+}
+
+.nav-right{
+  margin-right:15px;
+  display:flex;
+  align-items:center;
+  gap: 15px;
+}
+
+.btn{
+  padding:8px 16px;
+  border:none;
+  background:#08e7a4;
+  color:white;
+  cursor:pointer;
+  border-radius:4px;
+  font-weight: bold;
+}
+
+.btn1{
+  padding:8px 16px;
+  border:none;
+  background:#eb9c77;
+  color:white;
+  cursor:pointer;
+  border-radius:4px;
+  font-weight: bold;
+}
+
+/* Sections */
+section{
+  color:aliceblue;
+  font-size: 18px;
+  text-align: center;
+  padding:80px 40px; /* Increased padding so content isn't hidden behind the sticky navbar */
+  min-height:50vh;
+}
+
+.hero{
+  display:flex;
+  justify-content:center; 
+  text-align:center;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2); /* Softer divider line */
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">  
+  <div class="nav-left">
+    <div class="logo" style="display:flex; align-items:center; gap:18px;"> 
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <rect x="0" y="0" width="24" height="24" rx="5" fill="#0096FF"/>
+          <path d="M7 16V11" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 16V7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M17 16V13" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h1><span style="color:#00FFFF;">P</span><span style="color:#3cb371;">roduct Analytri</span><span style="color:#ff4d6b;">X</span></h1>
+    </div>
+    <div class="nav-links" id="navMenu">
+      <a class="active" onclick="goSection('home', this)">Home</a>
+      <a onclick="goSection('service', this)">Service</a>
+      <a onclick="goSection('about', this)">About</a>
+      <a onclick="goSection('contact', this)">Contact</a>
+    </div>
+  </div>  
+  <div class="nav-right">
+    <button class="btn" onclick="goLogin()">Login</button>
+    <button class="btn1" onclick="goSignup()">Signup</button>
+  </div>
+</div>
+
+<section id="home">
+  <div class="hero">
+    <div style="text-align: center;">
+      <h1>Home</h1>
+      <br>
+      <h3>Welcome to Product AnalytriX</h3>
+      <br>
+      <p style="max-width:700px; margin:0 auto; text-align:center; line-height: 1.6;">
+        Product Analytrix helps businesses understand their products better. We provide smart analytics, clear reports, and useful insights to improve your product performance.<br><br>
+        Our goal is to make data simple and powerful for everyone. With our tools, you can track growth, find problems, and make better decisions.
+      </p>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section id="service" style="text-align:center">
+  <h1>Service</h1>
+  <br>
+  <ul style="list-style-position:inside; text-align:left; display:inline-block; max-width: 600px; line-height: 1.6;">
+    <li style="margin-bottom: 15px;">
+      <strong>Product Analytics</strong><br>
+      We analyze your product data and show clear performance insights.
+    </li>
+    <li style="margin-bottom: 15px;">
+      <strong>User Behavior Tracking</strong><br>
+      Understand how users interact with your product.
+    </li>
+    <li>
+      <strong>Custom Reports</strong><br>
+      Get easy-to-read reports tailored to your business needs.
+    </li>
+  </ul>
+</section>
+<hr>
+
+<section id="about">
+  <h1>About Us</h1>
+  <br>
+  <p style="max-width:700px; margin:0 auto; text-align:center; line-height: 1.6;">
+    Product Analytrix is a data-focused platform dedicated to helping businesses grow through smart analytics. We believe every product can improve with the right insights.<br><br>
+    Our team works to provide simple, reliable, and effective analytics solutions. We focus on accuracy, clarity, and customer success.
+  </p>
+</section>
+<hr>
+
+<section id="contact">
+  <h1>Contact</h1>
+  <br>
+  <div style="line-height: 2;">
+    <h3>Email: productanalytrix@gmail.com</h3>
+    <h3>Phone: 7810035175 | 9003250082</h3>
+    <h3>Location: Chennai, Tamil Nadu</h3>
+  </div>
+</section>
+
+<script>
+function goSection(id, element){
+  // Scroll to the section
+  document.getElementById(id).scrollIntoView({
+    behavior:'smooth'
+  });
+  history.pushState(null,null,'#'+id);
+
+  // Remove 'active' class from all links
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => link.classList.remove('active'));
+
+  // Add 'active' class to the clicked link
+  if(element) {
+    element.classList.add('active');
+  }
+}
+
+function goLogin(){
+  window.location.href="login.html";
+}
+
+function goSignup(){
+  window.location.href="register.html";
+}
+</script>
+</body>
+</html>

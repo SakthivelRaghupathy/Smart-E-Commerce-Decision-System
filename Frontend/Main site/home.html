@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Page</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background-color:white;
+}
+
+/* ===== NAVBAR ===== */
+header{
+  background:#1c75be57;
+  color:rgb(25, 203, 235);
+  padding:20px 60px;   
+  width:100%;          
+  box-sizing:border-box;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+}
+
+.logo img{
+  height:60px;
+  margin-right:30px;
+}
+
+.nav-links a{
+  color:rgb(26, 107, 230);
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.nav-links a:hover{
+  text-decoration:underline;
+  color: #000;
+}
+.nav-links a.active{
+  text-decoration: underline;
+  color:#000;
+}
+
+/* ===== HERO ===== */
+
+.product-container{
+  background:rgba(12,225,240,0.1);
+  padding:50px 60px;
+  border-radius:20px;
+  backdrop-filter: blur(15px);
+  box-shadow:0 15px 40px rgba(25,27,27,0.4);
+  max-width:700px;
+}
+
+.product-container h1{
+  font-size:36px;
+  margin:15px 0;
+  font-weight:700;
+}
+
+.product-container h3{
+  font-weight:400;
+  margin:20px 0;
+  color:#1f4ce0;
+}
+
+/* ===== SEARCH BUTTON ===== */
+
+.search-box{
+  margin-top:30px;
+}
+
+.search-box button{
+  padding:14px 28px;
+  border:none;
+  border-radius:30px;
+  background:#1e3a8a;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.search-box button:hover{
+  background:#3b82f6;
+}
+
+/* ===== CONTENT ===== */
+
+.content{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-top:40px;
+  padding:23px;
+}
+
+.box{
+  background:rgb(89,211,233);
+  width:400px;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(17,5,5,0.1);
+}
+
+.box h2{
+  margin-bottom:20px;
+  color:#1e3a8a;
+}
+
+.box ul{
+  list-style:none;
+  padding:0;
+}
+
+.box ul li{
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+
+<header>
+  <div class="logo">
+    <img src="websitelogo.jpg.png" alt="Logo">
+    <img src="preview.jpg.png" alt="website name">
+  </div>
+
+  <div class="nav-links">
+    <a href="home.html">🏠 Home</a>
+    <a href="product-details.html">📄 Product</a>
+    <a href="analyse.html">📊 Analyze</a>
+    <a href="suggestion4.html">💡 Suggestion</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
+</header>
+
+<br><br>
+
+<center>
+<div class="product-container">
+
+  <h1><span style="color:black;">Find the</span>
+      <span style="color:#1613f1;"> Best Product...</span></h1>
+
+  <h1><span style="color:black;">Buy it at</span>
+      <span style="color:#1613f1;"> Best place...</span></h1>
+
+  <h3>
+    We analyze millions of reviews and price so,
+    just Tell us what you're looking for!...
+  </h3>
+
+  <div class="search-box">
+    <button onclick="goPage()">
+      Search Product
+    </button>
+  </div>
+
+</div>
+</center>
+
+<!-- ===== CONTENT ===== -->
+
+<div class="content">
+
+  <div class="box">
+    <h2>Recent Searches From Users</h2>
+    <ul>
+      <li>Wireless Headphones</li>
+      <li>iPhone 17 Price</li>
+      <li> Touch screen Laptop</li>
+      <li>Bluetooth Speaker</li>
+      <li>Smart Watch</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>Trending Analysis in 2026</h2>
+    <ul>
+      <li>🔥 AI Gadgets 2026</li>
+      <li>📈 Most Sold Smartphones</li>
+      <li>💎 Best Budget Laptops</li>
+      <li>🏆 Top Rated Products</li>
+      <li>⚡ Fast Charging Devices</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ✅ NAVIGATION SCRIPT -->
+
+<script>
+const links = document.querySelectorAll(".nav-links a");
+const current = window.location.pathname.split("/").pop();
+
+links.forEach(link=>{
+  if(link.getAttribute("href") === current){
+    link.classList.add("active");
+  }
+});
+function goPage() {
+    window.location.href = "product-details.html";
+}
+</script>
+
+</body>
+</html>

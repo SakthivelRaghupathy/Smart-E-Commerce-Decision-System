@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<style>
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw; /* Keeps the layout locked */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("logo.jpeg") center/cover no-repeat;
+    overflow: hidden; /* Prevents shifting */
+}
+
+.card {
+    width: 420px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
+    position: relative; /* Needed for the close button */
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #999;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+h2 { 
+    text-align: center; 
+    margin-top: 0;
+    margin-bottom: 20px; 
+}
+
+.brand-logo {
+    display: block;
+    margin: 0 auto 15px;
+    width: 70px; /* Adjust based on your actual logo size */
+    height: 70px;
+    object-fit: cover;
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Softer edges from your screenshot */
+    font-size: 14px;
+}
+
+button.action-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    border: none;
+    color: white;
+    border-radius: 8px; /* Softer edges */
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button.action-btn:disabled { background: #999; cursor: not-allowed; }
+
+.signup { text-align: center; margin-top: 15px; font-size: 14px; }
+.signup a { color: #6610f2; text-decoration: none; }
+
+/* Notification container */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.note {
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    animation: slide 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.success { background: #27ae60; }
+.error { background: #e74c3c; }
+
+@keyframes slide {
+    from { opacity: 0; transform: translateX(80px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="notification-container"></div>
+
+<div class="card">
+    <button class="close-btn" onclick="window.location.href='landing.html'">X</button>
+    
+    <h2>Welcome Back!</h2>
+    
+    <img src="loginlogo.jpeg" alt="Product Analytrix" class="brand-logo">
+    
+    <div class="subtitle">Login to your account</div>
+
+    <input id="username" placeholder="Your Username">
+    <input id="email" placeholder="Your Email">
+    
+    <button id="btn" class="action-btn">Generate OTP</button>
+
+    <div class="signup">
+        Don't have an account? <a href="register.html">Signup</a>
+    </div>
+</div>
+
+<script>
+function showNotification(msg, type) {
+    let container = document.getElementById("notification-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "notification-container";
+        document.body.appendChild(container);
+    }
+
+    const box = document.createElement("div");
+    box.className = "note " + type;
+    box.innerText = msg;
+    container.appendChild(box);
+    
+    setTimeout(() => box.remove(), 3000);
+}
+
+document.getElementById("btn").addEventListener("click", async (e) => {
+    e.preventDefault(); 
+
+    const btn = document.getElementById("btn");
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    if (!username || !email) {
+        showNotification("Enter username and email", "error");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = "Sending OTP...";
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/auth/generate-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            showNotification(data.message || "OTP Sent successfully!", "success");
+            setTimeout(() => {
+                window.location.assign(`verification.html?username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}`);
+            }, 1500);
+        } else {
+            showNotification(data.message, "error");
+            btn.disabled = false;
+            btn.innerText = "Generate OTP";
+        }
+
+    } catch (err) {
+        showNotification("Server error. Please check your console.", "error");
+        btn.disabled = false;
+        btn.innerText = "Generate OTP";
+    }
+});
+</script>
+
+</body>
+</html>
